@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apce.domains.CategoryDomain;
+import com.apce.domains.Category;
 import com.apce.repositories.CategoryRepository;
 
 @Service
@@ -15,12 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository repo;
 
 	@Override
-	public CategoryDomain find(Integer id) {
-		Optional<CategoryDomain> obj = repo.findById(id);
+	public Category find(Integer id) {
+		Optional<Category> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 	
-	private CategoryDomain convertDTOToEntity() {
+	private Category convertDTOToEntity() {
 		return null;
 	}
 }

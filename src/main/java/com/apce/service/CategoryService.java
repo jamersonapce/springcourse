@@ -1,8 +1,8 @@
 package com.apce.service;
 
-import com.apce.domains.CategoryDomain;
+import com.apce.domains.Category;
 
 public interface CategoryService {
 
-	public CategoryDomain find(Integer id);
+	public Category find(Integer id);
 }

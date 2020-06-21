@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apce.domains.CategoryDomain;
+import com.apce.domains.Category;
 import com.apce.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class CategoryResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		CategoryDomain obj = this.serv.find(id);
+		Category obj = this.serv.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
