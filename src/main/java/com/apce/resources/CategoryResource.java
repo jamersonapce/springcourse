@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apce.domains.Category;
-import com.apce.service.CategoryService;
+import com.apce.services.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 

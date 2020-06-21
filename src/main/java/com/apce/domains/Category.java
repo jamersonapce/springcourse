@@ -10,22 +10,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
-import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
-@Builder
-@Accessors(fluent = true)
-@Getter
 @Entity
 @Table(name = "TB_CATEGORIA")
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = {"id"})
+@Builder
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -33,6 +33,7 @@ public class Category implements Serializable {
 	private Integer id;
 	private String name;
 	@Singular
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "categories")
 	private List<Product> products;
 }

@@ -1,4 +1,4 @@
-package com.apce.service;
+package com.apce.services;
 
 import com.apce.domains.Category;
 
