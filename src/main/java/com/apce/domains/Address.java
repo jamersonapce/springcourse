@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -32,9 +34,10 @@ public class Address implements Serializable {
 	private String number;
 	private String neighborhood;
 	private String zipCode;
+	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,13 +20,13 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 @Entity
-@Table(name = "TB_CLIENT")
+@Table(name = "TB_CUSTOMER")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Builder
-public class Client implements Serializable {
+public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +34,13 @@ public class Client implements Serializable {
 	private String name;
 	private String email;
 	private String cpfOrCnpj;
-	private String clientType;
+	private String customerType;
 	@Singular
+	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Address> addresses;
 	@Singular
+	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Phone> phones;
 }
