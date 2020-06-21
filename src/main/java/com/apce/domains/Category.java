@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 @Entity
-@Table(name = "TB_CATEGORIA")
+@Table(name = "TB_CATEGORY")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
