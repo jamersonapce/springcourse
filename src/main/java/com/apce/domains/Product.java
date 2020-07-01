@@ -1,7 +1,10 @@
 package com.apce.domains;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -34,10 +39,22 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	private Double value;
+	@Digits(integer = 5, fraction = 2)
+    private BigDecimal value;
 	@Singular
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUCT_CATEGORY", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
+	@Singular
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> itens;
+	
+	public List<Order> getOrders(){
+		List<Order> list = new ArrayList<>();
+		for(OrderItem x : itens) {
+			list.add(x.getOrder());
+		}
+		return list;
+	}
 }

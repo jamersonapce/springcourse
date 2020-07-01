@@ -3,9 +3,9 @@ package com.apce.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.apce.domains.PaymentCard;
+import com.apce.domains.OrderItem;
 
 @Repository
-public interface PaymentCardRepository extends JpaRepository<PaymentCard, Integer>{
+public interface OrderItemRepository extends JpaRepository<OrderItem, Integer>{
 
 }
