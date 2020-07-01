@@ -37,10 +37,13 @@ public class Customer implements Serializable {
 	private String customerType;
 	@Singular
 	@JsonManagedReference
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "customer")
 	private List<Address> addresses;
 	@Singular
 	@JsonManagedReference
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "customer")
 	private List<Phone> phones;
+	@Singular
+	@OneToMany(mappedBy = "customer")
+	private List<Order> orders;
 }
