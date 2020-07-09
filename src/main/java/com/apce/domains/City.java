@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Builder
+@Builder(toBuilder = true)
 public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

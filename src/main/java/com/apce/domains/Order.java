@@ -15,28 +15,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.Singular;
 
 @Entity
 @Table(name = "TB_ORDER")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Builder
+@Builder(toBuilder = true)
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDateTime instante;
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
 	private Payment payment;
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
@@ -45,5 +51,5 @@ public class Order implements Serializable {
 	private Address deliveryAddress;
 	@Singular
 	@OneToMany(mappedBy = "id.order")
-	private Set<OrderItem> itens;
+	private Set<OrderItem> items;
 }
