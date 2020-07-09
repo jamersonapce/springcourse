@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,14 +36,12 @@ public class Customer implements Serializable {
 	private String cpfOrCnpj;
 	private String customerType;
 	@Singular
-	@JsonManagedReference
 	@OneToMany(mappedBy = "customer")
 	private List<Address> addresses;
 	@Singular
-	@JsonManagedReference
 	@OneToMany(mappedBy = "customer")
 	private List<Phone> phones;
-	@JsonBackReference
+	@JsonIgnore
 	@Singular
 	@OneToMany(mappedBy = "customer")
 	private List<Order> orders;

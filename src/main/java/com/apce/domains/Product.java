@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +31,7 @@ import lombok.Singular;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 @Builder(toBuilder = true)
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -41,9 +40,10 @@ public class Product implements Serializable {
 	private Integer id;
 	private String name;
 	@Digits(integer = 5, fraction = 2)
-    private BigDecimal value;
+	private BigDecimal value;
+
+	@JsonIgnore
 	@Singular
-	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUCT_CATEGORY", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
@@ -51,11 +51,11 @@ public class Product implements Serializable {
 	@Singular
 	@OneToMany(mappedBy = "id.product")
 	private Set<OrderItem> items;
-	
+
 	@JsonIgnore
-	public List<Order> getOrders(){
+	public List<Order> getOrders() {
 		List<Order> list = new ArrayList<>();
-		for(OrderItem x : items) {
+		for (OrderItem x : items) {
 			list.add(x.getOrder());
 		}
 		return list;
