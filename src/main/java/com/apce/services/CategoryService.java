@@ -9,4 +9,5 @@ public interface CategoryService {
 	public Category find(Integer id);
 	public Category insert(CategoryCreateDTO dto);
 	public Category update(Integer id, CategoryUpdateDTO dto);
+	public void delete(Integer id);
 }

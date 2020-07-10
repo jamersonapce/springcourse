@@ -3,6 +3,7 @@ package com.apce.resources;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,12 @@ public class CategoryResource {
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody CategoryUpdateDTO dto) {
 		this.serv.update(id, dto);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		this.serv.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

@@ -2,12 +2,14 @@ package com.apce.services;
 
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.apce.domains.Category;
 import com.apce.domains.dtos.CategoryCreateDTO;
 import com.apce.domains.dtos.CategoryUpdateDTO;
 import com.apce.repositories.CategoryRepository;
+import com.apce.services.exceptions.DataIntegrityException;
 import com.apce.services.exceptions.ObjectNotFoundException;
 import com.apce.utils.mappers.Mapper;
 
@@ -46,5 +48,15 @@ public class CategoryServiceImpl implements CategoryService {
 											.id(id)
 												.build();
 		return this.repo.save(entity);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		this.find(id);
+		try {
+			this.repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("You cannot delete a category that has products!");
+		}
 	}
 }
