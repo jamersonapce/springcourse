@@ -2,11 +2,13 @@ package com.apce.resources.exceptions;
 
 import java.io.Serializable;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
+@AllArgsConstructor
 public class StandardError implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer status;

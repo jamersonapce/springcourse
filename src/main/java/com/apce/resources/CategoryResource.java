@@ -3,6 +3,8 @@ package com.apce.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,14 +40,14 @@ public class CategoryResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody CategoryCreateDTO dto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoryCreateDTO dto) {
 		Category result = this.serv.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody CategoryUpdateDTO dto) {
+	public ResponseEntity<Void> update(@PathVariable Integer id,  @Valid @RequestBody CategoryUpdateDTO dto) {
 		this.serv.update(id, dto);
 		return ResponseEntity.noContent().build();
 	}
