@@ -24,6 +24,12 @@ public class Mapper<T> {
 		this.configuration(dto.getClass());
 		return (T) mapper.map(dto, obj.getClass());
 	}
+	
+	@SuppressWarnings("unchecked")
+	public <S> T toDto(S Entity) {
+		this.configuration(Entity.getClass());
+		return (T) mapper.map(Entity, obj.getClass());
+	}
 
 	private <S> void configuration(Class<S> dto) {
 		Configuration builderConfiguration = mapper.getConfiguration().copy()

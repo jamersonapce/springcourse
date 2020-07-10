@@ -1,6 +1,7 @@
 package com.apce.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apce.domains.Category;
-import com.apce.domains.dtos.CategoryCreateDTO;
-import com.apce.domains.dtos.CategoryUpdateDTO;
+import com.apce.domains.dtos.categories.CategoryCreateDTO;
+import com.apce.domains.dtos.categories.CategoryReadDTO;
+import com.apce.domains.dtos.categories.CategoryUpdateDTO;
 import com.apce.services.CategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +52,11 @@ public class CategoryResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		this.serv.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping()
+	public ResponseEntity<List<CategoryReadDTO>> findAll() {
+		return ResponseEntity.ok().body(this.serv.findAll());
 	}
 
 }

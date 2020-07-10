@@ -7,7 +7,7 @@ import org.modelmapper.convention.NamingConventions;
 import org.springframework.stereotype.Component;
 
 import com.apce.domains.Category;
-import com.apce.domains.dtos.CategoryDTO;
+import com.apce.domains.dtos.categories.CategoryDTO;
 
 import lombok.RequiredArgsConstructor;
 
