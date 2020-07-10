@@ -22,7 +22,4 @@ public class CustomerServiceImpl implements CustomerService {
 		return obj.orElseThrow( () -> new ObjectNotFoundException("Customer not found!") );
 	}
 	
-	private Customer convertDTOToEntity() {
-		return null;
-	}
 }

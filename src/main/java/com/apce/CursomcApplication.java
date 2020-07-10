@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.apce.domains.Address;
 import com.apce.domains.Category;
@@ -32,9 +34,9 @@ import com.apce.repositories.CustomerRepository;
 import com.apce.repositories.OrderItemRepository;
 import com.apce.repositories.OrderRepository;
 import com.apce.repositories.PaymentRepository;
+import com.apce.repositories.PhoneRepository;
 import com.apce.repositories.ProductRepository;
 import com.apce.repositories.StateRepository;
-import com.apce.repositories.PhoneRepository;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
@@ -62,6 +64,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
+	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper;
 	}
 
 	@Override
@@ -124,8 +132,8 @@ public class CursomcApplication implements CommandLineRunner {
 		f2 = f2.toBuilder().customer(cli1).build();
 		e1 = e1.toBuilder().customer(cli1).build();
 		e2 = e2.toBuilder().customer(cli1).build();
-		
-		phoneRepository.saveAll(Arrays.asList(f1,f2));
+
+		phoneRepository.saveAll(Arrays.asList(f1, f2));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
 		Order ped1 = Order.builder().id(null)
@@ -148,7 +156,7 @@ public class CursomcApplication implements CommandLineRunner {
 
 		ped1 = pedidoRepository.saveAndFlush(ped1);
 		ped2 = pedidoRepository.saveAndFlush(ped2);
-		
+
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
 		OrderItem ip1 = new OrderItem(ped1, p1, new BigDecimal("0.00"), new BigDecimal("2000.00"), 1);
@@ -163,7 +171,7 @@ public class CursomcApplication implements CommandLineRunner {
 		p3 = p3.toBuilder().items(Arrays.asList(ip2)).build();
 
 		itemOrderRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
-		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 	}
 
 }
