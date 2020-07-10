@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.apce.domains.Category;
-import com.apce.domains.Category.CategoryBuilder;
-import com.apce.domains.dtos.CategoryDTO;
+import com.apce.domains.dtos.CategoryCreateDTO;
+import com.apce.domains.dtos.CategoryUpdateDTO;
 import com.apce.repositories.CategoryRepository;
 import com.apce.services.exceptions.ObjectNotFoundException;
 import com.apce.utils.mappers.Mapper;
@@ -26,11 +26,25 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category insert(CategoryDTO dto) {
-		Mapper<CategoryBuilder> mapper = Mapper.<Category.CategoryBuilder>builder()
-												.obj(Category.builder().id(null))
+	public Category insert(CategoryCreateDTO dto) {
+		Category entity = Mapper.<Category.CategoryBuilder>builder()
+								.obj(Category.builder())
+									.build()
+										.toEntity(dto)
+											.id(null)
 												.build();
-		Category entity = mapper.toEntity(dto).build();
+		return this.repo.save(entity);
+	}
+
+	@Override
+	public Category update(Integer id, CategoryUpdateDTO dto) {
+		this.find(id);
+		Category entity = Mapper.<Category.CategoryBuilder>builder()
+								.obj(Category.builder())
+									.build()
+										.toEntity(dto)
+											.id(id)
+												.build();
 		return this.repo.save(entity);
 	}
 }

@@ -19,7 +19,7 @@ public class CustomerResource {
 	private final CustomerService serv;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Customer> find(@PathVariable Integer id) {
 		Customer obj = this.serv.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
