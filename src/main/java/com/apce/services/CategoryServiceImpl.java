@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.apce.domains.Category;
@@ -65,13 +68,26 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<CategoryReadDTO> findAll() {
-		final List<CategoryReadDTO> resultList = this.repo.findAll().stream().map(obj -> 
+		final List<CategoryReadDTO> resultList = this.repo.findAll().stream().map(item -> 
 			Mapper.<CategoryReadDTO.CategoryReadDTOBuilder>builder()
 										.obj(CategoryReadDTO.builder())
 										.build()
-										.toDto(obj)
+										.toDto(item)
 										.build()
 		).collect(Collectors.toList());
+		return resultList;
+	}
+
+	@Override
+	public Page<CategoryReadDTO> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		final Page<CategoryReadDTO> resultList = this.repo.findAll(pageRequest).map(item -> 
+					Mapper.<CategoryReadDTO.CategoryReadDTOBuilder>builder()
+												.obj(CategoryReadDTO.builder())
+												.build()
+												.toDto(item)
+												.build()
+		);
 		return resultList;
 	}
 }

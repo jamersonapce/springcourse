@@ -77,6 +77,11 @@ public class CursomcApplication implements CommandLineRunner {
 
 		Category cat1 = Category.builder().id(null).name("Informática").build();
 		Category cat2 = Category.builder().id(null).name("Escritório").build();
+		Category cat3 = Category.builder().id(null).name("Cama mesa e banho").build();
+		Category cat4 = Category.builder().id(null).name("Eletrônicos").build();
+		Category cat5 = Category.builder().id(null).name("Jardinagem").build();
+		Category cat6 = Category.builder().id(null).name("Decoração").build();
+		Category cat7 = Category.builder().id(null).name("Perfumaria").build();
 
 		Product p1 = Product.builder().id(null).name("Computador").value(new BigDecimal("2000")).build();
 		Product p2 = Product.builder().id(null).name("Impressora").value(new BigDecimal("800.00")).build();
@@ -89,7 +94,7 @@ public class CursomcApplication implements CommandLineRunner {
 		p2 = p2.toBuilder().categories(Arrays.asList(cat1, cat2)).build();
 		p3 = p3.toBuilder().categories(Arrays.asList(cat1)).build();
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 		State est1 = State.builder().id(null).name("Minas Gerais").build();
